@@ -24,8 +24,8 @@ export const useUserStore = defineStore('app-user', {
      */
     async getToken(loginReq: loginReq) {
       const res = await login(loginReq)
-      if (res && res.data) {
-        setToken(res.data.token)
+      if (res) {
+        setToken(res.token)
         return await this.getInfo()
       } else {
         return res
@@ -33,11 +33,10 @@ export const useUserStore = defineStore('app-user', {
     },
     // 根据token获取用户信息
     async getInfo() {
-      return getInfo().then((res) => {
-        const { data, code, msg } = res
+      return getInfo().then((data) => {
         this.userInfo = data
         setUserInfo(data)
-        return { msg, code }
+        return data
       })
     },
 

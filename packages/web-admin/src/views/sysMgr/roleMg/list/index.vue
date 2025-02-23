@@ -28,8 +28,8 @@ export default defineComponent({
       getRoleList(params)
         .then((res) => {
           state.listLoading = false
-          state.roleList = res.data.list || []
-          state.pagination.total = res.data.count
+          state.roleList = res.list || []
+          state.pagination.total = res.count
         })
         .catch(() => {
           state.listLoading = false

@@ -31,8 +31,8 @@ export default defineComponent({
       getBtnList(params)
         .then((res) => {
           state.listLoading = false
-          state.btnList = res.data.list || []
-          state.pagination.total = res.data.count
+          state.btnList = res.list || []
+          state.pagination.total = res.count
         })
         .catch(() => {
           state.listLoading = false

@@ -52,59 +52,59 @@
 </template>
 
 <script lang="ts">
-import { EmFormType } from "@/components";
-import { usePermitStore } from "@/store/modules/permit";
-import { useUserStore } from "@/store/modules/user";
-import { clear, getToken } from "@/utils/storage";
-import { defineComponent, reactive, ref, toRefs, unref } from "vue";
-import { useRouter } from "vue-router";
+import { defineComponent, reactive, ref, toRefs, unref } from 'vue'
+import { useRouter } from 'vue-router'
+import { type EmFormType } from '@/components'
+import { usePermitStore } from '@/store/modules/permit'
+import { useUserStore } from '@/store/modules/user'
+import { clear, getToken } from '@/utils/storage'
 export default defineComponent({
   components: {},
   setup() {
-    const loginFormRef = ref<EmFormType.Instance>();
+    const loginFormRef = ref<EmFormType.Instance>()
 
-    const userStore = useUserStore();
-    const permission = usePermitStore();
+    const userStore = useUserStore()
+    const permission = usePermitStore()
 
-    const router = useRouter();
+    const router = useRouter()
     if (getToken() || permission.asyncRouters.length > 0) {
-      clear();
-      window.location.reload();
+      clear()
+      window.location.reload()
     }
 
     const state = reactive({
       loginForm: {
-        account: "",
-        password: "",
+        account: '',
+        password: ''
       },
-      passwordType: "password",
+      passwordType: 'password',
       loading: false,
       showDialog: false,
-      isRember: false,
-    });
+      isRember: false
+    })
 
     const handleLogin = async () => {
-      const form = unref(loginFormRef);
-      if (!form) return;
-      state.loading = true;
+      const form = unref(loginFormRef)
+      if (!form) return
+      state.loading = true
       try {
-        await form.validate();
-        await userStore.getToken(state.loginForm);
-        state.loading = false;
-        router.push("/");
+        await form.validate()
+        await userStore.getToken(state.loginForm)
+        state.loading = false
+        router.push('/')
       } catch (error) {
-        console.log(error);
-        state.loading = false;
+        console.log(error)
+        state.loading = false
       }
-    };
+    }
 
     return {
       loginFormRef,
       ...toRefs(state),
-      handleLogin,
-    };
-  },
-});
+      handleLogin
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -116,7 +116,7 @@ $loginCursorColor: #fff;
 .login-container {
   position: relative;
   height: 100%;
-  background: url("../../assets/images/bg_login_cover.png");
+  background: url('../../assets/images/bg_login_cover.png');
   background-size: cover;
 
   .login-form {

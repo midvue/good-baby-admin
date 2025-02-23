@@ -29,8 +29,8 @@ export default defineComponent({
       getUserList(params)
         .then((res) => {
           state.listLoading = false
-          state.userList = res.data.list || []
-          state.pagination.total = res.data.count
+          state.userList = res.list || []
+          state.pagination.total = res.count
         })
         .catch(() => {
           state.listLoading = false

@@ -22,7 +22,7 @@ export const usePermitStore = defineStore('tz-permit', {
     // 获取异步路由菜单
     async getAsyncRoutes() {
       const roleIds = getUserInfo()?.roles.map((role) => role.roleId)
-      const list = await getMenusByRole({ roleIds }).then((res) => res.data.list)
+      const list = await getMenusByRole({ roleIds }).then((res) => res.list)
       const { menuTree, menuBtnMap } = generateAsyncRoutes(list, router)
       this.menuBtnMap = menuBtnMap
       this.asyncRouters = menuTree

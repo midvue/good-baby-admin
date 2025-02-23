@@ -1,13 +1,13 @@
-import { EnumMenuType, ROOT_MENU_PID } from "@/views/sysMgr/constant";
-import { reactive } from "vue";
-import { addBatchMenu, getBasicBtnList } from "../../api";
-import type { Menu, MenuListState } from "../../types";
+import { EnumMenuType, ROOT_MENU_PID } from '@/views/sysMgr/constant'
+import { reactive } from 'vue'
+import { addBatchMenu, getBasicBtnList } from '../../api'
+import type { Menu, MenuListState } from '../../types'
 
 interface DState {
-  list: Menu[];
-  checkAll: boolean;
-  checkCodes: string[];
-  isShow: boolean;
+  list: Menu[]
+  checkAll: boolean
+  checkCodes: string[]
+  isShow: boolean
 }
 /**
  * 基础按钮弹窗
@@ -19,69 +19,69 @@ export const useBasicBtnDialog = (state: MenuListState, getBtnlist: () => void) 
     isShow: false,
     list: [],
     checkAll: false,
-    checkCodes: [],
-  });
+    checkCodes: []
+  })
 
-  const allCodes: string[] = [];
-  let pid = ROOT_MENU_PID;
+  const allCodes: string[] = []
+  let pid = ROOT_MENU_PID
 
   const handleSubmit = async () => {
     const btns = bState.list
       .filter((btn) => bState.checkCodes.includes(btn.code) && !btn.disabled)
       .map((btn) => {
-        const { code, name, orderNum, icon } = btn;
-        return { code, name, orderNum, icon, pid, type: EnumMenuType.BUTTON };
-      });
+        const { code, name, orderNum, icon } = btn
+        return { code, name, orderNum, icon, pid, type: EnumMenuType.BUTTON }
+      })
     addBatchMenu(btns).then(() => {
-      $EmMsg.success("操作成功");
-      getBtnlist();
-      handlCancel();
-    });
-  };
+      $EmMsg.success('操作成功')
+      getBtnlist()
+      handlCancel()
+    })
+  }
 
   const handlCancel = async () => {
-    bState.isShow = false;
-  };
+    bState.isShow = false
+  }
 
   const handleCheckAllChange = (isCheck: boolean) => {
-    bState.checkCodes = isCheck ? allCodes : [];
-  };
+    bState.checkCodes = isCheck ? allCodes : []
+  }
 
   const handleChecked = () => {
-    bState.checkAll = bState.checkCodes.length === allCodes.length;
-  };
+    bState.checkAll = bState.checkCodes.length === allCodes.length
+  }
 
   const getList = () => {
     getBasicBtnList().then((res) => {
-      const list = res.data.list || [];
+      const list = res.list || []
       //设置是否禁用
       list.forEach((item) => {
-        item.disabled = bState.checkCodes.includes(item.code);
-        allCodes.push(item.code);
-      });
+        item.disabled = bState.checkCodes.includes(item.code)
+        allCodes.push(item.code)
+      })
       //过来掉传过来的自定义的多余的code
-      bState.checkCodes = bState.checkCodes.filter((code) => allCodes.includes(code));
+      bState.checkCodes = bState.checkCodes.filter((code) => allCodes.includes(code))
       //设置是否全选
-      bState.checkAll = bState.checkCodes.length === allCodes.length;
-      bState.list = list;
-    });
-  };
+      bState.checkAll = bState.checkCodes.length === allCodes.length
+      bState.list = list
+    })
+  }
 
   const openDialog = (_pid: number, codes: string[]) => {
-    pid = _pid;
-    bState.checkCodes = codes;
-    getList();
-    bState.isShow = true;
-  };
+    pid = _pid
+    bState.checkCodes = codes
+    getList()
+    bState.isShow = true
+  }
 
   return {
     openDialog,
     render: () => (
-      <div class="form-dialog">
+      <div class='form-dialog'>
         <el-dialog
           v-model={bState.isShow}
-          title="同步基础按钮"
-          width="600px"
+          title='同步基础按钮'
+          width='600px'
           center
           onClose={handlCancel}
         >
@@ -101,16 +101,16 @@ export const useBasicBtnDialog = (state: MenuListState, getBtnlist: () => void) 
               </>
             ),
             footer: () => (
-              <div class="form-footer">
+              <div class='form-footer'>
                 <el-button onClick={() => handlCancel()}>取消</el-button>
-                <el-button type="primary" onClick={() => handleSubmit()}>
+                <el-button type='primary' onClick={() => handleSubmit()}>
                   保存
                 </el-button>
               </div>
-            ),
+            )
           }}
         </el-dialog>
       </div>
-    ),
-  };
-};
+    )
+  }
+}

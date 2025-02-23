@@ -55,7 +55,6 @@ class Http {
     const config = Object.assign({}, this.defaultReqConfig, reqConfig)
     const option = parseRequest(config) as Record<string, any>
     this.setAdapter(option)
-    option.baseURL = ''
     return this.client.request<any, T>(option)
   }
 

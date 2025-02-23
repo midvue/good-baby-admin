@@ -1,5 +1,5 @@
 import http from '@mid-vue/http-client'
-import { LoginResp, Menu, UserInfo } from './types'
+import { type LoginResp, type Menu, type UserInfo } from './types'
 
 /**
  * 登陆接口
@@ -10,6 +10,7 @@ export const login = (data = {}) => {
     url: 'sys/auth/token',
     data
   }
+
   return http.post<LoginResp>(option)
 }
 

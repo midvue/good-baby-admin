@@ -30,7 +30,7 @@ export default defineComponent({
       getMenuList(params)
         .then((res) => {
           state.listLoading = false
-          state.menuList = res.data.list || []
+          state.menuList = res.list || []
         })
         .catch(() => {
           state.listLoading = false

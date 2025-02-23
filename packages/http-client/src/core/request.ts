@@ -1,16 +1,7 @@
 import md5 from 'js-md5'
 import { EnumContentType } from '../constants'
-import { isFunction, random } from '../utils'
-import { getToken } from './config'
+import { isFunction } from '../utils'
 import type { HttpRequestConfig } from '../types'
-
-/**
- * 处理请求行
- */
-export function parseUrl(url: string = '', baseUrl = '') {
-  url = url.startsWith('/') ? url : `?${url}`
-  return `${baseUrl}${url}`
-}
 
 /**
  * 创建请求头
@@ -18,7 +9,7 @@ export function parseUrl(url: string = '', baseUrl = '') {
 export function parseHeaders(config: HttpRequestConfig) {
   const { url, data } = config
 
-  const token = isFunction(config.token) ? config.token() : config.token || getToken() || ''
+  const token = isFunction(config.token) ? config.token() || '' : config.token || ''
 
   const _getSign = () => {
     return md5(md5(token).toUpperCase() + JSON.stringify(data || {})).toUpperCase()
@@ -26,7 +17,7 @@ export function parseHeaders(config: HttpRequestConfig) {
   const _headers = {
     ...config.headers,
     method: url,
-    Authorization: 'Bearer ' + token,
+    Authorization: token ? 'Bearer ' + token : undefined,
     sign: _getSign(),
   }
   return _headers
@@ -73,11 +64,10 @@ export function parseRequest(config: HttpRequestConfig) {
   //处理请求头
   const headers = parseHeaders(config)
   //处理请求行
-  const url = parseUrl(config.url!, config.baseURL!)
+  //const url = parseUrl(config.url!)
   return {
     ...config,
     headers,
     ...body,
-    url,
   }
 }
