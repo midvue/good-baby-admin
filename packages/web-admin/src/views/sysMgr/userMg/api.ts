@@ -1,5 +1,5 @@
-import http from "@/lib/tzAxios";
-import { User, UserResp } from "./types";
+import http from '@mid-vue/http-client'
+import { User, UserResp } from './types'
 
 /**
  * 获取用户列表
@@ -7,11 +7,11 @@ import { User, UserResp } from "./types";
  */
 export const getUserList = (data = {}) => {
   const option = {
-    url: "/sys/user/page",
-    data: data,
-  };
-  return http.post<UserResp>(option);
-};
+    url: '/sys/user/page',
+    data: data
+  }
+  return http.post<UserResp>(option)
+}
 
 /**
  * 添加用户
@@ -19,11 +19,11 @@ export const getUserList = (data = {}) => {
  */
 export const addUser = (data: Partial<User>) => {
   const option = {
-    url: "/sys/user/create",
-    data,
-  };
-  return http.post<User>(option);
-};
+    url: '/sys/user/create',
+    data
+  }
+  return http.post<User>(option)
+}
 
 /**
  * 更新用户
@@ -31,11 +31,11 @@ export const addUser = (data: Partial<User>) => {
  */
 export const updateUser = (data: Partial<User>) => {
   const option = {
-    url: "/sys/user/update",
-    data,
-  };
-  return http.put(option);
-};
+    url: '/sys/user/update',
+    data
+  }
+  return http.put(option)
+}
 
 /**
  * 删除用户
@@ -43,8 +43,8 @@ export const updateUser = (data: Partial<User>) => {
  */
 export const deleteUser = (data = {}) => {
   const option = {
-    url: "/sys/user/delete/",
-    params: data,
-  };
-  return http.delete(option);
-};
+    url: '/sys/user/delete/',
+    params: data
+  }
+  return http.delete(option)
+}

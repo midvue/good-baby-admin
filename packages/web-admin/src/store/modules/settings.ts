@@ -1,29 +1,28 @@
-import { defineStore } from "pinia";
-import { store } from "..";
+import { defineStore } from 'pinia'
+import { store } from '..'
 interface SettingStore {
-  title: string;
-  fixedHeader: boolean;
-  hiddenSideBar: boolean;
+  title: string
+  fixedHeader: boolean
+  hiddenSideBar: boolean
 }
-export const useSettingStore = defineStore({
-  id: "tz-setting",
+export const useSettingStore = defineStore('tz-setting', {
   state: (): SettingStore => {
     return {
       title: import.meta.env.VITE_APP_TITLE,
       fixedHeader: import.meta.env.VITE_APP_FIXED_HEADER,
-      hiddenSideBar: import.meta.env.VITE_APP_HIDDEN_SIDE_BAR,
-    };
+      hiddenSideBar: import.meta.env.VITE_APP_HIDDEN_SIDE_BAR
+    }
   },
   getters: {
     getTitle(): string {
-      return this.title;
+      return this.title
     },
     getFixedHeader(): boolean {
-      return this.fixedHeader;
+      return this.fixedHeader
     },
     getHiddenSideBar(): boolean {
-      return this.hiddenSideBar;
-    },
+      return this.hiddenSideBar
+    }
   },
   actions: {
     // @ts-ignore
@@ -35,11 +34,11 @@ export const useSettingStore = defineStore({
     },
     // @ts-ignore
     changeSetting(data) {
-      this.CHANGE_SETTING(data);
-    },
-  },
-});
+      this.CHANGE_SETTING(data)
+    }
+  }
+})
 
 export function useSettingStoreHook() {
-  return useSettingStore(store);
+  return useSettingStore(store)
 }

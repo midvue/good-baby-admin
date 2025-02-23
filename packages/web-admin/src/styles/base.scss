@@ -7,7 +7,11 @@ html {
   padding: 0;
   height: 100%;
   font-weight: 400;
-  font-family: Microsoft YaHei, PingFangSC-Regular, Arial, sans-serif;
+  font-family:
+    Microsoft YaHei,
+    PingFangSC-Regular,
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
@@ -82,7 +86,7 @@ img {
 }
 
 .clearfix:after {
-  content: "";
+  content: '';
   display: block;
   height: 0;
   clear: both;
@@ -213,6 +217,6 @@ a:active {
   cursor: pointer;
 }
 
-@import "./element.scss";
-@import "./page.scss";
-@import "./transition.scss";
+@import './element.scss';
+@import './page.scss';
+@import './transition.scss';

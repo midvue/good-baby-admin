@@ -14,12 +14,5 @@ export const useHttp = <T = any>(config: HttpRequestConfigWrap) => {
   return Http.init().request<T>(config)
 }
 
-/**
- * 发送请求
- */
-export const useRequest = <T = any>(config: HttpRequestConfigWrap) => {
-  return Http.init().request<T>(config)
-}
-
 export { Http }
 export default Http

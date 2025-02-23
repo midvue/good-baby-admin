@@ -1,5 +1,5 @@
-import http from "@/lib/tzAxios";
-import { Btn, BtnResp } from "./types";
+import http from '@mid-vue/http-client'
+import { type Btn, type BtnResp } from './types'
 
 /**
  * 获取按钮列表
@@ -7,11 +7,11 @@ import { Btn, BtnResp } from "./types";
  */
 export const getBtnList = (data = {}) => {
   const option = {
-    url: "/sys/btn/page",
-    data: data,
-  };
-  return http.post<BtnResp>(option);
-};
+    url: '/sys/btn/page',
+    data: data
+  }
+  return http.post<BtnResp>(option)
+}
 
 /**
  * 添加按钮
@@ -19,11 +19,11 @@ export const getBtnList = (data = {}) => {
  */
 export const addBtn = (data: Partial<Btn>) => {
   const option = {
-    url: "/sys/btn/create",
-    data,
-  };
-  return http.post<Btn>(option);
-};
+    url: '/sys/btn/create',
+    data
+  }
+  return http.post<Btn>(option)
+}
 
 /**
  * 更新按钮
@@ -31,11 +31,11 @@ export const addBtn = (data: Partial<Btn>) => {
  */
 export const updateBtn = (data: Partial<Btn>) => {
   const option = {
-    url: "/sys/btn/update",
-    data,
-  };
-  return http.put(option);
-};
+    url: '/sys/btn/update',
+    data
+  }
+  return http.put(option)
+}
 
 /**
  * 删除按钮
@@ -43,8 +43,8 @@ export const updateBtn = (data: Partial<Btn>) => {
  */
 export const deleteBtn = (data = {}) => {
   const option = {
-    url: "/sys/btn/delete/",
-    params: data,
-  };
-  return http.delete(option);
-};
+    url: '/sys/btn/delete/',
+    params: data
+  }
+  return http.delete(option)
+}

@@ -4,7 +4,7 @@
       v-if="sidebarOption.isMobile && !sidebarOption.hideSidebar"
       class="drawer-bg"
       @click="handleClickOutside"
-    />
+    ></div>
     <sidebar class="sidebar-container" />
     <div class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
@@ -17,56 +17,56 @@
 </template>
 
 <script lang="ts">
-import { useAppStore } from "@/store/modules/app";
-import { useSettingStore } from "@/store/modules/settings";
-import { DEVICE_TYPE } from "@/store/modules/types";
-import { computed, defineComponent } from "vue";
-import { AppMain, Navbar, Sidebar, TagsView } from "./components";
+import { computed, defineComponent } from 'vue'
+import { useAppStore } from '@/store/modules/app'
+import { useSettingStore } from '@/store/modules/settings'
+import { DEVICE_TYPE } from '@/store/modules/types'
+import { AppMain, Navbar, Sidebar, TagsView } from './components'
 export default defineComponent({
-  name: "Layout",
+  name: 'Layout',
   components: {
     Navbar,
     Sidebar,
     AppMain,
-    TagsView,
+    TagsView
   },
   setup() {
-    const appStore = useAppStore();
-    const setting = useSettingStore();
+    const appStore = useAppStore()
+    const setting = useSettingStore()
 
     const fixedHeader = computed(() => {
-      return setting.fixedHeader;
-    });
+      return setting.fixedHeader
+    })
 
     const sidebarOption = computed(() => {
       return {
         hideSidebar: !appStore.sidebar.opened,
         withoutAnimation: appStore.sidebar.withoutAnimation,
-        isMobile: appStore.device === DEVICE_TYPE.MOBILE,
-      };
-    });
+        isMobile: appStore.device === DEVICE_TYPE.MOBILE
+      }
+    })
 
     const isSubApp = () => {
-      return window.self === window.top;
-    };
+      return window.self === window.top
+    }
 
     const handleClickOutside = () => {
-      appStore.closeSideBar();
-    };
+      appStore.closeSideBar()
+    }
 
     return {
       fixedHeader,
       sidebarOption,
       handleClickOutside,
-      isSubApp,
-    };
-  },
-});
+      isSubApp
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/mixin.scss";
-@import "@/styles/sidebar.scss";
+@import '@/styles/mixin.scss';
+@import '@/styles/sidebar.module.scss';
 
 .main-contrainer-wrapper {
   @include clearfix;

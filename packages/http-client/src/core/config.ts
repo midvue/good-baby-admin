@@ -34,13 +34,11 @@ export const defaultInterceptors = () => {
 export const defaultConfig: HttpRequestConfig = {
   baseURL: '',
   headers: {
-    appkey: '',
     method: EnumMethod.POST,
     'Content-Type': EnumContentType.JSON,
   },
   timeout: 10000,
   loading: false,
-  casToken: true,
   method: 'POST',
   interceptors: defaultInterceptors(),
 }

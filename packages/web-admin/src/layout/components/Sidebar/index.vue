@@ -21,41 +21,41 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import Logo from "./Logo.vue";
-import SidebarItem from "./SidebarItem.vue";
-import sidebarClr from "@/styles/sidebar.scss";
-import { usePermitStore } from "@/store/modules/permit";
-import { useAppStore } from "@/store/modules/app";
-import { useRoute } from "vue-router";
+import sidebarClr from '@/styles/sidebar.module.scss'
+import { computed, defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
+import { usePermitStore } from '@/store/modules/permit'
+import { useAppStore } from '@/store/modules/app'
+import Logo from './Logo.vue'
+import SidebarItem from './SidebarItem.vue'
 
 export default defineComponent({
   components: { SidebarItem, Logo },
   setup() {
-    const permission = usePermitStore();
-    const appStore = useAppStore();
+    const permission = usePermitStore()
+    const appStore = useAppStore()
 
-    const showLogo = import.meta.env.VITE_APP_SHOW_LOGO;
+    const showLogo = import.meta.env.VITE_APP_SHOW_LOGO
 
     const routes = computed(() => {
-      return permission.asyncRouters.filter((route) => !!route.meta);
-    });
+      return permission.asyncRouters.filter((route) => !!route.meta)
+    })
 
     const sidebar = computed(() => {
-      return appStore.sidebar;
-    });
+      return appStore.sidebar
+    })
 
     const isCollapse = computed(() => {
-      return !sidebar.value.opened;
-    });
+      return !sidebar.value.opened
+    })
 
-    const activePath = computed(() => useRoute().path);
+    const activePath = computed(() => useRoute().path)
 
     const variables = computed(() => {
-      return sidebarClr as any;
-    });
+      return sidebarClr as any
+    })
 
-    return { sidebar, routes, showLogo, isCollapse, variables, activePath };
-  },
-});
+    return { sidebar, routes, showLogo, isCollapse, variables, activePath }
+  }
+})
 </script>

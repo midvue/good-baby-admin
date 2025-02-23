@@ -16,7 +16,7 @@ export function parseUrl(url: string = '', baseUrl = '') {
  * 创建请求头
  */
 export function parseHeaders(config: HttpRequestConfig) {
-  const { url, data, menuId = '' } = config
+  const { url, data } = config
 
   const token = isFunction(config.token) ? config.token() : config.token || getToken() || ''
 
@@ -26,7 +26,7 @@ export function parseHeaders(config: HttpRequestConfig) {
   const _headers = {
     ...config.headers,
     method: url,
-    Authorization: token,
+    Authorization: 'Bearer ' + token,
     sign: _getSign(),
   }
   return _headers

@@ -1,31 +1,32 @@
 <script lang="tsx">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
+import { type JSX } from 'vue/jsx-runtime'
 export default defineComponent({
-  name: "MenuIcon",
+  name: 'MenuIcon',
   functional: true,
   inheritAttrs: false,
   props: {
     icon: {
       type: String || null,
-      default: "",
-    },
+      default: ''
+    }
   },
   setup(props) {
-    const vnodes: JSX.Element[] = [];
+    const vnodes: JSX.Element[] = []
     if (props.icon) {
-      if (props.icon.includes("el-icon") || props.icon.includes("el-")) {
-        vnodes.push(<i class={[props.icon, "sub-el-icon"]} />);
+      if (props.icon.includes('el-icon') || props.icon.includes('el-')) {
+        vnodes.push(<i class={[props.icon, 'sub-el-icon']} />)
       } else {
-        vnodes.push(<svg-icon name={props.icon} class="sub-el-icon" />);
+        vnodes.push(<svg-icon name={props.icon} class='sub-el-icon' />)
       }
     }
-    return () => <> {vnodes} </>;
-  },
-});
+    return () => <> {vnodes} </>
+  }
+})
 </script>
 
 <style lang="scss">
-@import "@/styles/sidebarVar.scss";
+@import '@/styles/sidebarVar.scss';
 
 .sub-el-icon {
   flex: none;

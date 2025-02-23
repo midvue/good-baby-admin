@@ -4,17 +4,13 @@ import type { EnumContentType, EnumMethod } from './constants'
 export type MethodValueType = (typeof EnumMethod)[keyof typeof EnumMethod] | string
 
 export interface HttpRequestConfig<T = any> extends AxiosRequestConfig<T> {
-  //应用唯一的appkey
-  appkey?: string | number
   /**
    * token，可以是个函数
    */
   token?: string | (() => string)
+
   /** userId ,可以是函数 */
   userId?: string | (() => string)
-
-  /** 菜单id */
-  menuId?: string
 
   // 是否开启loading
   loading?: boolean
@@ -38,7 +34,6 @@ export interface HttpRequestConfig<T = any> extends AxiosRequestConfig<T> {
   showErrorMsg?: (msg: string) => void
   casToken?: boolean
   headers: {
-    appkey: string
     method: MethodValueType
     'Content-Type': EnumContentType
     'content-type'?: EnumContentType

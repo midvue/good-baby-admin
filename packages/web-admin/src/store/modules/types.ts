@@ -5,11 +5,11 @@
  */
 export enum DEVICE_TYPE {
   /** pc端布局 */
-  PC = "pc",
+  PC = 'pc',
   /** 移动端布局 */
-  MOBILE = "moblie",
+  MOBILE = 'moblie'
 }
 export interface tagviewStore {
-  cacheViews: string[];
-  tagViews: EmRouteRaw[];
+  cacheViews: string[]
+  tagViews: EmRouteRaw[]
 }

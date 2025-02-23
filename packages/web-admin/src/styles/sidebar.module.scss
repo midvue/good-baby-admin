@@ -1,4 +1,4 @@
-@import "./sidebarVar.scss";
+@import './sidebarVar.scss';
 #app {
   .main-container {
     min-height: 100%;
@@ -21,7 +21,10 @@
     overflow: hidden;
 
     .horizontal-collapse-transition {
-      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+      transition:
+        0s width ease-in-out,
+        0s padding-left ease-in-out,
+        0s padding-right ease-in-out;
     }
 
     .scrollbar-wrapper {

@@ -3,7 +3,6 @@ import type { HttpRequestConfig } from '../types'
 
 export function createWXAdapter(config: HttpRequestConfig): any {
   return new Promise(function (resolve, reject) {
-    config.headers['appkey'] = String(config.headers.appkey || '')
     const header = { ...config.headers }
     // @ts-ignore
     ;(wx as Wx).request({

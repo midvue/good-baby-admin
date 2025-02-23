@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { createWXAdapter } from '../adapter/taro'
-import { isKuaShengClient } from '../utils'
 import { defaultConfig } from './config'
 import { handleInterceptor } from './interceptor'
 import { parseRequest } from './request'
@@ -60,16 +59,24 @@ class Http {
     return this.client.request<any, T>(option)
   }
 
-  get<T = any>(_url: string, reqConfig: HttpRequestConfigWrap) {
-    return this.request<T>({ url: _url, method: 'get', ...reqConfig })
-  }
-  /** post请求 */
-  post<T = any>(_url: string, reqConfig: HttpRequestConfigWrap) {
-    return this.request<T>({ url: _url, method: 'post', ...reqConfig })
+  /** get请求 */
+  public static get<T = any>(reqConfig: HttpRequestConfigWrap) {
+    return Http.init().request<T>({ method: 'get', ...reqConfig })
   }
 
-  put<T = any>(_url: string, reqConfig: HttpRequestConfigWrap) {
-    return this.request<T>({ url: _url, method: 'put', ...reqConfig })
+  /** post请求 */
+  public static post<T = any>(reqConfig: HttpRequestConfigWrap) {
+    return Http.init().request<T>({ method: 'post', ...reqConfig })
+  }
+
+  /** put 请求 */
+  public static put<T = any>(reqConfig: HttpRequestConfigWrap) {
+    return Http.init().request<T>({ method: 'put', ...reqConfig })
+  }
+
+  /** delete 请求 */
+  public static delete<T = any>(reqConfig: HttpRequestConfigWrap) {
+    return Http.init().request<T>({ method: 'delete', ...reqConfig })
   }
 }
 

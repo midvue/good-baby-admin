@@ -1,5 +1,5 @@
-import http from "@/lib/tzAxios";
-import type { Role } from "./types";
+import http from '@mid-vue/http-client'
+import type { Role } from './types'
 
 /**
  * 获取角色列表
@@ -7,7 +7,7 @@ import type { Role } from "./types";
  */
 export const getRoleList = () => {
   const option = {
-    url: "/sys/role/list",
-  };
-  return http.get<Role[]>(option);
-};
+    url: '/sys/role/list'
+  }
+  return http.get<Role[]>(option)
+}

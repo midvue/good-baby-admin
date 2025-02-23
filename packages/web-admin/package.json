@@ -3,16 +3,17 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite dev --force",
-    "build": "vue-tsc --noEmit --skipLibCheck && vite build",
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "@mid-vue/http-client": "workspace:*",
     "@mid-vue/shared": "workspace:*",
-    "@vueuse/core": "^10.3.0",
-    "element-plus": "^2.9.5",
+    "@mid-vue/use": "workspace:*",
+    "@vueuse/core": "^12.7.0",
+    "element-plus": "2.3.9",
     "vue": "^3.5.0",
     "pinia": "^3.0.1",
     "vue-router": "^4.5.0"
@@ -21,7 +22,9 @@
     "@mid-vue/eslint-config": "workspace:*",
     "@mid-vue/tsconfig": "workspace:*",
     "@mid-vue/vite-config": "workspace:*",
-    "sass": "^1.63.6",
+    "sass": "1.70.0",
+    "unplugin-auto-import": "^19.1.0",
+    "unplugin-element-plus": "0.9.1",
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-svg-icons": "^2.0.1"
   }

@@ -136,8 +136,8 @@ module.exports = defineConfig({
     'import/no-named-as-default-member': 'off',
     'import/named': 'off',
 
-    // tsdoc
-    'tsdoc/syntax': 'warn',
+    // // tsdoc
+    // 'tsdoc/syntax': 'warn',
   },
 
   overrides: [

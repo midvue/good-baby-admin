@@ -1,3 +1,4 @@
+import { type App } from 'vue'
 import {
   ElAside,
   ElButton,
@@ -29,16 +30,15 @@ import {
   ElTreeV2,
   ElLoading,
   ElMessage,
-  ElInputNumber,
-} from "element-plus";
-import { App } from "vue";
+  ElInputNumber
+} from 'element-plus'
 
 /**
  * 全局按需注入ElementPlus
  * @param app vue 对象
  */
 export const useElementPlus = (app: App) => {
-  app.use(ElMessage).use(ElLoading);
+  app.use(ElMessage).use(ElLoading)
   app
     .use(ElAside)
     .use(ElButton)
@@ -68,5 +68,5 @@ export const useElementPlus = (app: App) => {
     .use(ElTable)
     .use(ElTableColumn)
     .use(ElTreeV2)
-    .use(ElInputNumber);
-};
+    .use(ElInputNumber)
+}
