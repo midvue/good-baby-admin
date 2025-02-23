@@ -1,0 +1,16 @@
+{
+  "name": "@mid-vue/tsconfig",
+  "version": "0.0.2",
+  "description": "A base TSConfig for working with mid-vue",
+  "author": "SPig",
+  "main": "tsconfig.json",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "mid",
+    "tsconfig"
+  ],
+  "peerDependencies": {
+    "@types/node": "*"
+  }
+}

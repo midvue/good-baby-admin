@@ -1,0 +1,25 @@
+{
+  "extends": "@mid-vue/tsconfig",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "~/*": [
+        "src/*"
+      ]
+    },
+    "types": [
+      "@types/big.js"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/*.d.ts",
+    "../../types/"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@mid-vue/eslint-config",
+  "version": "0.1.0",
+  "description": "this is a  eslint config for vue3.0 and typescript",
+  "main": "index.js",
+  "keywords": [
+    "eslint",
+    "vue3",
+    "typescript"
+  ],
+  "author": "SPig",
+  "license": "MIT",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-tsdoc": "^0.3.0",
+    "eslint-plugin-vue": "^9.26.0",
+    "prettier": "^3.3.2",
+    "eslint": "^8.57.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

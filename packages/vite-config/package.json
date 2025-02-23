@@ -1,0 +1,47 @@
+{
+  "name": "@mid-vue/vite-config",
+  "version": "0.1.0",
+  "description": "this is a vite config",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://nexus.ky-tech.com.cn:8081/repository/npmjs-hosted"
+  },
+  "scripts": {
+    "chii:start": "chii --version",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build": "npm run build:cjs & npm run build:esm && node ./scripts/build.mjs"
+  },
+  "keywords": [],
+  "author": "SPig",
+  "license": "MIT",
+  "peerDependencies": {
+    "vite": "^5.4.8"
+  },
+  "dependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@vitejs/plugin-legacy": "^5.4.3",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "chii": "^0.1.2",
+    "fs-extra": "^11.2.0",
+    "http2-proxy": "^5.0.53",
+    "picocolors": "^1.0.0",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "terser": "^5.22.0",
+    "unplugin-auto-import": "^0.17.5",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-dts": "^4.3.0",
+    "vite-plugin-style-import": "^2.0.0"
+  }
+}

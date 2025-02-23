@@ -1,0 +1,30 @@
+{
+  "extends": "@mid-vue/tsconfig/tsconfig.web.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "~/*": [
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/__tests__/**/*",
+    "**/gulpfile.ts",
+    "**/test-helper",
+    "**/*.md"
+  ]
+}

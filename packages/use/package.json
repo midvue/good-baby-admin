@@ -1,0 +1,9 @@
+{
+  "name": "@mid-vue/use",
+  "version": "0.0.1",
+  "description": "this is a vue use package",
+  "main": "./src/index.ts",
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}

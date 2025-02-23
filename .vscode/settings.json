@@ -1,0 +1,41 @@
+{
+  "editor.formatOnSave": true,
+  "emmet.triggerExpansionOnTab": true,
+  // 添加 vue 支持
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "html",
+    "vue-html": "html",
+    "plaintext": "jade",
+    "ejs": "html",
+    "typescriptreact": "html",
+    "javascriptreact": "html"
+  },
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "cSpell.words": [
+    "commitlint",
+    "midwayjs",
+    "pinia",
+    "preinstall",
+    "tinyint",
+    "vant"
+  ],
+}
