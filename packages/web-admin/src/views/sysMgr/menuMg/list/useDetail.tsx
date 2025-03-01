@@ -1,8 +1,8 @@
 import { h, resolveComponent, watch } from 'vue'
 import { deleteMenu, getMenuList } from '../api'
-import type { Menu, MenuListState, OpenDialogFunc } from '../types'
 import { useBasicBtnDialog } from './dialog/useBasicBtnDialog'
 import { useBtnDialog } from './dialog/useBtnDialog'
+import type { Menu, MenuListState, OpenDialogFunc } from '../types'
 import type { EmTableType } from '@/components'
 
 /**

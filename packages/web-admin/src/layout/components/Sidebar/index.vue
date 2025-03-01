@@ -34,6 +34,7 @@ export default defineComponent({
   setup() {
     const permission = usePermitStore()
     const appStore = useAppStore()
+    const route = useRoute()
 
     const showLogo = import.meta.env.VITE_APP_SHOW_LOGO
 
@@ -49,7 +50,7 @@ export default defineComponent({
       return !sidebar.value.opened
     })
 
-    const activePath = computed(() => useRoute().path)
+    const activePath = computed(() => route.path)
 
     const variables = computed(() => {
       return sidebarClr as any

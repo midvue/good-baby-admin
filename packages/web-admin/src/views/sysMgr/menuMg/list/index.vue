@@ -19,7 +19,10 @@ export default defineComponent({
 
     //更新菜单信息
     const handelMenuInfo = async () => {
-      const { data } = await getMenuInfo({ id: state.currNodes[0].id })
+      const data = await getMenuInfo({ id: state.currNodes[0].id })
+
+      console.log(data, 22)
+
       state.currNodes = [data]
     }
 

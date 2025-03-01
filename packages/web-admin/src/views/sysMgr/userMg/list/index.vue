@@ -38,8 +38,7 @@ export default defineComponent({
     }
 
     const getSelectRoleList = async () => {
-      const { data } = await getRoleList()
-      state.roleList = data
+      state.roleList = await getRoleList()
     }
 
     getSelectRoleList()

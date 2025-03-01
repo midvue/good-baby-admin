@@ -1,5 +1,5 @@
 import http from '@mid-vue/http-client'
-import { Menu, MenuResp } from './types'
+import { type Menu, type MenuResp } from './types'
 
 /**
  * 分页获取菜单列表

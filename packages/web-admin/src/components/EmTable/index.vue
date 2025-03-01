@@ -1,27 +1,27 @@
 <script lang="tsx">
-import { defineComponent } from "vue";
-import { useBtns, useCols, usePagination } from "./hooks";
-import { props } from "./props";
+import { defineComponent } from 'vue'
+import { useBtns, useCols, usePagination } from './hooks'
+import { props } from './props'
 export default defineComponent({
-  name: "EmTable",
+  name: 'EmTable',
   props,
   setup(props, ctx) {
-    const { attrs } = ctx;
-    const renderBtns = useBtns(props);
-    const renderCols = useCols(props);
-    const renderPagination = usePagination(props, ctx);
+    const { attrs } = ctx
+    const renderBtns = useBtns(props)
+    const renderCols = useCols(props)
+    const renderPagination = usePagination(props, ctx)
 
     return () => (
       <>
-        <el-table size="small" class="em-table" border stripe {...attrs}>
+        <el-table size='small' class='em-table' border stripe {...attrs}>
           {renderCols()}
           {renderBtns()}
         </el-table>
         {renderPagination()}
       </>
-    );
-  },
-});
+    )
+  }
+})
 </script>
 
 <style lang="scss" scoped>
