@@ -4,20 +4,20 @@
   </el-config-provider>
 </template>
 <script>
-import { defineComponent } from "vue";
-import zhCn from "element-plus/dist/locale/zh-cn.mjs";
+import { defineComponent } from 'vue'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {},
   setup() {
     // const color = useCssVar("--el-color-primary");
     // color.value = "#1c78ef";
     // useCssVar("--el-border-radius-base").value = "2px";
 
-    const locale = zhCn;
-    return { locale, zIndex: 2000, size: "default" };
-  },
-});
+    const locale = zhCn
+    return { locale, zIndex: 2000, size: 'default' }
+  }
+})
 </script>
 
 <style lang="scss">

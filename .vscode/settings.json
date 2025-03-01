@@ -35,6 +35,7 @@
     "midwayjs",
     "pinia",
     "preinstall",
+    "tailwindcss",
     "tinyint",
     "vant",
     "vueuse"

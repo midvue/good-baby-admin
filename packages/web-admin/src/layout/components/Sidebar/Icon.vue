@@ -1,6 +1,5 @@
 <script lang="tsx">
-import { defineComponent } from 'vue'
-import { type JSX } from 'vue/jsx-runtime'
+import { defineComponent, h, resolveComponent } from 'vue'
 export default defineComponent({
   name: 'MenuIcon',
   functional: true,
@@ -12,15 +11,19 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const vnodes: JSX.Element[] = []
-    if (props.icon) {
-      if (props.icon.includes('el-icon') || props.icon.includes('el-')) {
-        vnodes.push(<i class={[props.icon, 'sub-el-icon']} />)
-      } else {
-        vnodes.push(<svg-icon name={props.icon} class='sub-el-icon' />)
-      }
-    }
-    return () => <> {vnodes} </>
+    // const vnodes: JSX.Element[] = []
+    // if (props.icon) {
+    //   if (props.icon.includes('el-icon') || props.icon.includes('el-')) {
+    //     vnodes.push(<i class={[props.icon, 'sub-el-icon']} />)
+    //   } else {
+    //     vnodes.push(<svg-icon name={props.icon} class='sub-el-icon' />)
+    //   }
+    // }
+
+    return () =>
+      h(resolveComponent(props.icon), {
+        style: { width: '1em', verticalAlign: 'middle', marginRight: '3px' }
+      })
   }
 })
 </script>

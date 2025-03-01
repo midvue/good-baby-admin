@@ -1,14 +1,14 @@
 import { reactive, ref } from 'vue'
 import { type EmFormType } from '@/components'
-import { addDict, updateDict } from '../api'
-import type { Dict, OpenDialogFunc } from '../types'
+import { addDict, updateDict } from '../../api'
+import type { Dict, OpenDialogFunc } from '../../types'
 
 interface BState {
   form: Partial<Dict>
   isShow: boolean
   isAdd: boolean
 }
-
+/** 字典编辑新增 */
 export const useEditDialog = (getSearchList: () => void) => {
   const formRef = ref<HTMLFormElement>()
   const bState = reactive<BState>({

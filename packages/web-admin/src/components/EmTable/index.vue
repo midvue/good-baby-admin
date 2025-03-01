@@ -13,7 +13,7 @@ export default defineComponent({
 
     return () => (
       <>
-        <el-table size='small' class='em-table' border stripe {...attrs}>
+        <el-table data={props.data} size='small' class='em-table' border stripe {...attrs}>
           {renderCols()}
           {renderBtns()}
         </el-table>

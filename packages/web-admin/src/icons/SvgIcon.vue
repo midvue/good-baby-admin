@@ -4,36 +4,36 @@
   </svg>
 </template>
 
-<script>
-import { defineComponent, computed } from "vue";
+<script lang="tsx">
+import { defineComponent, computed } from 'vue'
 
 export default defineComponent({
-  name: "SvgIcon",
+  name: 'SvgIcon',
   props: {
     prefix: {
       type: String,
-      default: "icon",
+      default: 'icon'
     },
     className: {
       type: String,
-      default: "",
+      default: ''
     },
     name: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
-    const symbolId = computed(() => `#${props.prefix}-${props.name}`);
+    const symbolId = computed(() => `#${props.prefix}-${props.name}`)
     const svgClass = computed(() => {
       if (props.className) {
-        return `svg-icon ${props.className}`;
+        return `svg-icon ${props.className}`
       }
-      return "svg-icon";
-    });
-    return { symbolId, svgClass };
-  },
-});
+      return 'svg-icon'
+    })
+    return { symbolId, svgClass }
+  }
+})
 </script>
 <style scoped>
 .svg-icon {

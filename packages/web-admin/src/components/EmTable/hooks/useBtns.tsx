@@ -1,3 +1,4 @@
+import { isFunction } from '@mid-vue/shared'
 import type { IProps } from '../props'
 import type { RowScoped } from '../types'
 
@@ -14,20 +15,28 @@ export const useBtns = (props: IProps) => {
       >
         {{
           default: (scoped: RowScoped) => {
-            return props.action.buttons.map((btn) => (
-              <el-button
-                type={btn.type || 'primary'}
-                size={btn.size || 'small'}
-                icon={btn.icon}
-                onClick={(e: PointerEvent) => {
-                  e.stopPropagation()
-                  btn.click?.(scoped)
-                }}
-                v-permission={btn.permission}
-              >
-                {btn.title}
-              </el-button>
-            ))
+            const buttons = isFunction(props.action.buttons)
+              ? props.action.buttons(scoped)
+              : props.action.buttons
+
+            return buttons.map((btn) => {
+              const slot = btn.title ? { default: () => btn.title } : null
+              return (
+                <el-button
+                  type={btn.type || 'primary'}
+                  size={btn.size || 'small'}
+                  icon={btn.icon}
+                  circle={btn.circle || false}
+                  {...btn.attr}
+                  onClick={(e: PointerEvent) => {
+                    e.stopPropagation()
+                    btn.click?.(scoped)
+                  }}
+                  v-permission={btn.permission}
+                  v-slots={slot}
+                ></el-button>
+              )
+            })
           }
         }}
       </el-table-column>

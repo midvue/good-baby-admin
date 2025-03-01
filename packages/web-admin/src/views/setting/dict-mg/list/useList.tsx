@@ -1,9 +1,13 @@
+import { ElButton } from 'element-plus'
 import { useCtxState } from '@mid-vue/use'
+import { copyTextToClipboard, dateFormat } from '@mid-vue/shared'
+import { EmTable, type EmTableType } from '@/components'
 import { deleteDict } from '../api'
-import type { EmTableType } from '@/components'
-import type { Dict, DictListState, OpenDialogFunc } from '../types'
+import { useEditDialog } from './dialog/useEditDialog'
+import { useDictTableDialog } from './dialog/useDictTableDialog'
+import type { Dict, DictListState } from '../types'
 
-export const useList = (openDialog: OpenDialogFunc, getSearchList: () => void) => {
+export const useList = (getSearchList: () => void) => {
   const [state] = useCtxState<DictListState>()
   const handleDelete = (id: number) => {
     $EmMsgBox.warning('确定永久删除当前字典嘛,请谨慎操作!', {}).then(async () => {
@@ -38,9 +42,33 @@ export const useList = (openDialog: OpenDialogFunc, getSearchList: () => void) =
     {
       label: '编码',
       prop: 'code',
-      align: 'center'
+      align: 'center',
+      render: ({ row }) => (
+        <>
+          <span>{row.code}</span>
+          <ElButton
+            class='ml-8'
+            size='small'
+            circle
+            icon='CopyDocument'
+            onClick={() => {
+              copyTextToClipboard(row.code)
+              $EmMsg.success('复制成功')
+            }}
+          ></ElButton>
+        </>
+      )
     },
-
+    {
+      label: '内容',
+      prop: 'content',
+      align: 'center',
+      render: (scoped) => (
+        <ElButton type='primary' size='small' plain onClick={() => openDictDialog(scoped.row)}>
+          添加/编辑内容
+        </ElButton>
+      )
+    },
     {
       prop: 'remark',
       label: '备注',
@@ -49,12 +77,14 @@ export const useList = (openDialog: OpenDialogFunc, getSearchList: () => void) =
     {
       prop: 'createTime',
       label: '创建时间',
-      align: 'center'
+      align: 'center',
+      render: ({ row }) => <span>{dateFormat(row.createTime)}</span>
     },
     {
       prop: 'updateTime',
       label: '更新时间',
-      align: 'center'
+      align: 'center',
+      render: ({ row }) => <span>{dateFormat(row.updateTime)}</span>
     }
   ]
 
@@ -73,15 +103,16 @@ export const useList = (openDialog: OpenDialogFunc, getSearchList: () => void) =
       }
     ]
   }
-
+  const { render: renderDialog, openDialog } = useEditDialog(getSearchList)
+  const { render: renderDictTableDialog, open: openDictDialog } = useDictTableDialog(getSearchList)
   return () => (
     <>
       <div class='toolbar'>
-        <el-button type='primary' icon='plus' onClick={() => openDialog()}>
+        <ElButton type='primary' icon='plus' onClick={() => openDialog()}>
           添加字典
-        </el-button>
+        </ElButton>
       </div>
-      <em-table data={state.dictList} cols={cols} action={tableAction}></em-table>
+      <EmTable data={state.dictList} cols={cols} action={tableAction}></EmTable>
       <div class='footer'>
         <el-pagination
           v-model:currentPage={state.pagination.current}
@@ -92,6 +123,8 @@ export const useList = (openDialog: OpenDialogFunc, getSearchList: () => void) =
           onCurrentChange={handleCurrentChange}
         ></el-pagination>
       </div>
+      {renderDialog()}
+      {renderDictTableDialog()}
     </>
   )
 }

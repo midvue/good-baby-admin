@@ -28,16 +28,18 @@ export interface ICol<T = any> {
 export type Cols<T = any> = Array<ICol<T>>
 
 interface Btn<T> {
-  title: string
+  title?: string
   type: string
   size?: 'small' | 'default' | 'large'
   icon?: string
+  circle?: boolean
   click?: (scoped: RowScoped<T>) => void
   permission?: string
+  attr?: Record<string, any>
 }
 
 export type IAction<T = any> = {
-  buttons: Array<Btn<T>>
+  buttons: Array<Btn<T>> | ((scoped: T) => Array<Btn<T>>)
   width: number
   num?: number
   fixed?: string
@@ -50,7 +52,7 @@ export type IPagination = {
   total: number
 }
 
-type IRow = Record<string, any>
+export type IRow = Record<string, any>
 
 export type FormExpose = {
   getSelectionRows: () => void

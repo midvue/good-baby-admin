@@ -2,7 +2,6 @@
 import { defineComponent } from 'vue'
 import { defineCtxState } from '@mid-vue/use'
 import { getDictList } from '../api'
-import { useEditDialog } from './useEditDialog'
 import { useList } from './useList'
 import { useSearchForm } from './useSearchForm'
 import type { DictListState } from '../types'
@@ -37,14 +36,12 @@ export default defineComponent({
     }
 
     const renderSearch = useSearchForm(getSearchList)
-    const { render: renderDialog, openDialog } = useEditDialog(getSearchList)
-    const renderList = useList(openDialog, getSearchList)
+    const renderList = useList(getSearchList)
 
     return () => (
       <div class='dict-mg'>
         {renderSearch()}
         {renderList()}
-        {renderDialog()}
       </div>
     )
   }

@@ -3,12 +3,21 @@ export interface DictResp {
   list: Dict[]
 }
 
+export interface DictInfo {
+  code: string
+  name: string
+  ext: string
+  sort: number
+}
+
 export interface Dict {
   id: number
   name: string
   code: string
-  content: { code: string; name: string; ext: string }[]
+  list: DictInfo[]
   remark: string
+  createTime: number
+  updateTime: number
 }
 
 export interface DictListState {

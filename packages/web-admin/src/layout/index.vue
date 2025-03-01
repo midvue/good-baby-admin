@@ -1,5 +1,5 @@
 <template>
-  <div class="main-contrainer-wrapper" :class="{ hideSidebar: sidebarOption.hideSidebar }">
+  <div class="main-container-wrapper" :class="{ hideSidebar: sidebarOption.hideSidebar }">
     <div
       v-if="sidebarOption.isMobile && !sidebarOption.hideSidebar"
       class="drawer-bg"
@@ -68,7 +68,7 @@ export default defineComponent({
 @import '@/styles/mixin.scss';
 @import '@/styles/sidebar.module.scss';
 
-.main-contrainer-wrapper {
+.main-container-wrapper {
   @include clearfix;
   position: relative;
   height: 100%;
