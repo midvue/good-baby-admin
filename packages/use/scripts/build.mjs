@@ -47,7 +47,7 @@ const createPackageJson = () => {
       },
       "./style.css": "./style.css"
     },
-    "keywords": ["lodash", "dayjs", "big.js","${name || ''}"],
+    "keywords": ["vue", "vueuse","${name || ''}"],
     "license": "MIT",
     "author": "SPig",
     "publishConfig":${JSON.stringify(publishConfig)},
@@ -72,7 +72,7 @@ const buildAll = async () => {
         fileName: (format) => `shared.${format}.js`,
       },
       rollupOptions: {
-        external: ['vue'],
+        external: ['vue', '@mid-vue/shared'],
         globals: {
           vue: 'Vue',
         },

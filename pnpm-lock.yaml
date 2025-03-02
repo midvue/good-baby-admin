@@ -48,6 +48,9 @@ importers:
       eslint:
         specifier: ^8.51.0
         version: 8.57.1
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.3.0
       husky:
         specifier: ^8.0.3
         version: 8.0.3
@@ -158,6 +161,9 @@ importers:
 
   packages/use:
     dependencies:
+      '@mid-vue/shared':
+        specifier: ^0.0.1
+        version: 0.0.1
       vue:
         specifier: ^3.0.0
         version: 3.5.13(typescript@5.7.3)
@@ -1898,6 +1904,16 @@ packages:
 
   /@microsoft/tsdoc@0.15.1:
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
+    dev: false
+
+  /@mid-vue/shared@0.0.1:
+    resolution: {integrity: sha512-K/hN2oGwLu0PCNqlUy8krnrR5+PcxbD+EnMGYDE3Fl5sPN1Q1VNEdnCzHENyC5uCquLTb9/MstpuieasT7iIpA==}
+    dependencies:
+      '@types/big.js': 6.2.2
+      '@types/js-cookie': 3.0.6
+      big.js: 6.2.2
+      dayjs: 1.11.13
+      js-cookie: 3.0.5
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:

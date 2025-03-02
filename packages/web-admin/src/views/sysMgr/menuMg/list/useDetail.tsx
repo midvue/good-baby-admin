@@ -42,7 +42,8 @@ export const useDetail = (
       align: 'center',
       render: ({ row }) => {
         if (!row.icon) return null
-        return h(resolveComponent(row.icon), {
+        if (row.icon.startsWith('<')) return null
+        return h(resolveComponent(row.icon.trim()), {
           style: { width: '1.5em', verticalAlign: 'middle' }
         })
       }
@@ -104,13 +105,13 @@ export const useDetail = (
     ]
   }
 
-  const getBtnlist = () => {
+  const getBtnList = () => {
     getMenuList({ pid: state.currNodes[0].id, type: 2 }).then((res) => {
       state.currBtns = res.list
     })
   }
 
-  watch(() => state?.currNodes[0]?.id, getBtnlist)
+  watch(() => state?.currNodes[0]?.id, getBtnList)
 
   const handleDelete = (id: number) => {
     $EmMsgBox.warning('确定永久删除当前菜单吗,请谨慎操作!', {}).then(async () => {
@@ -121,7 +122,7 @@ export const useDetail = (
     })
   }
 
-  const rendBtnTable = useBtnTable(state, getBtnlist)
+  const rendBtnTable = useBtnTable(state, getBtnList)
   return () => (
     <el-main class='main'>
       <em-table data={state.currNodes} cols={cols} action={tableAction}></em-table>

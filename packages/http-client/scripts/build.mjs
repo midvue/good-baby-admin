@@ -29,8 +29,8 @@ const {
 // 生成 package.json
 const createPackageJson = () => {
   const pkgName = name
-  const pkgUMD = './shared.umd.js'
-  const pkgESM = './shared.es.js'
+  const pkgUMD = './http-client.umd.js'
+  const pkgESM = './http-client.es.js'
 
   const fileStr = `{
     "name": "${pkgName}",
@@ -44,8 +44,7 @@ const createPackageJson = () => {
       ".": {
         "import": "${pkgESM}",
         "require": "${pkgUMD}"
-      },
-      "./style.css": "./style.css"
+      }
     },
     "keywords": ["lodash", "dayjs", "big.js","${name || ''}"],
     "license": "MIT",
@@ -68,15 +67,10 @@ const buildAll = async () => {
       target: 'es2015',
       lib: {
         entry: './src/index.ts',
-        name: 'shared',
-        fileName: (format) => `shared.${format}.js`,
+        name: 'http-client',
+        fileName: (format) => `http-client.${format}.js`,
       },
-      rollupOptions: {
-        external: ['vue'],
-        globals: {
-          vue: 'Vue',
-        },
-      },
+      rollupOptions: {},
     },
   })
   await build(config)

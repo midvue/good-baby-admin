@@ -1,9 +1,21 @@
 {
   "name": "@mid-vue/use",
   "version": "0.0.1",
-  "description": "this is a vue use package",
+  "description": "this is a vue3use package",
   "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "build": "node ./scripts/build.mjs"
+  },
+  "dependencies": {},
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "@mid-vue/shared": "^0.0.1"
   }
 }

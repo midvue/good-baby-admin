@@ -5,6 +5,9 @@
   "main": "./src/index.ts",
   "module": "./src/index.ts",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",

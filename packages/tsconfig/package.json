@@ -1,6 +1,6 @@
 {
   "name": "@mid-vue/tsconfig",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "A base TSConfig for working with mid-vue",
   "author": "SPig",
   "main": "tsconfig.json",
@@ -10,6 +10,9 @@
     "mid",
     "tsconfig"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@types/node": "*"
   }

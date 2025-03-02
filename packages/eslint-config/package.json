@@ -1,8 +1,14 @@
 {
   "name": "@mid-vue/eslint-config",
-  "version": "0.1.0",
-  "description": "this is a  eslint config for vue3.0 and typescript",
+  "version": "0.0.1",
+  "description": "this is a eslint config for vue3.0 and typescript",
   "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    }
+  },
   "keywords": [
     "eslint",
     "vue3",
@@ -10,6 +16,9 @@
   ],
   "author": "SPig",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",

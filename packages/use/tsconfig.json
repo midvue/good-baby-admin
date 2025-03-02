@@ -1,13 +1,16 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@mid-vue/tsconfig",
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
-      "~/*": ["src/*"]
-    }
+      "@/*": [
+        "src/*"
+      ],
+      "~/*": [
+        "src/*"
+      ]
+    },
   },
-
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",

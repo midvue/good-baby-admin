@@ -1,6 +1,6 @@
 {
   "name": "@mid-vue/vite-config",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "this is a vite config",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -13,11 +13,14 @@
     }
   },
   "publishConfig": {
-    "access": "public",
-    "registry": "http://nexus.ky-tech.com.cn:8081/repository/npmjs-hosted"
+    "access": "public"
   },
+  "files": [
+    "dist",
+    "package.json",
+    "tsconfig.*.json"
+  ],
   "scripts": {
-    "chii:start": "chii --version",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "build": "npm run build:cjs & npm run build:esm && node ./scripts/build.mjs"
@@ -33,7 +36,6 @@
     "@vitejs/plugin-legacy": "^5.4.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
-    "chii": "^0.1.2",
     "fs-extra": "^11.2.0",
     "http2-proxy": "^5.0.53",
     "picocolors": "^1.0.0",
