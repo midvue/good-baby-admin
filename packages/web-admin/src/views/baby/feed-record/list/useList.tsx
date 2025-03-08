@@ -2,16 +2,16 @@ import { ElButton } from 'element-plus'
 import { useCtxState } from '@mid-vue/use'
 import { copyTextToClipboard, dateFormat } from '@mid-vue/shared'
 import { EmTable, type EmTableType } from '@/components'
-import { deleteDict } from '../api'
+import { deleteFeedRecord } from '../api'
 import { useEditDialog } from './dialog/useEditDialog'
-import { useDictTableDialog } from './dialog/useDictTableDialog'
-import type { Dict, DictListState } from '../types'
+import { useFeedRecordTableDialog } from './dialog/useFeedRecordTableDialog'
+import type { FeedRecord, FeedRecordListState } from '../types'
 
 export const useList = (getSearchList: () => void) => {
-  const [state] = useCtxState<DictListState>()
+  const [state] = useCtxState<FeedRecordListState>()
   const handleDelete = (id: number) => {
-    $EmMsgBox.warning('确定永久删除当前字典嘛,请谨慎操作!', {}).then(async () => {
-      deleteDict({ id }).then(() => {
+    $EmMsgBox.warning('确定永久删除当前喂养记录嘛,请谨慎操作!', {}).then(async () => {
+      deleteFeedRecord({ id }).then(() => {
         getSearchList()
         $EmMsg.success('删除成功')
       })
@@ -27,7 +27,7 @@ export const useList = (getSearchList: () => void) => {
     getSearchList()
   }
 
-  const cols: EmTableType.Cols<Dict> = [
+  const cols: EmTableType.Cols<FeedRecord> = [
     {
       label: '序号',
       prop: 'id',
@@ -35,39 +35,19 @@ export const useList = (getSearchList: () => void) => {
       width: 55
     },
     {
-      label: '名称',
-      prop: 'name',
+      label: '喂养类型',
+      prop: 'type',
       align: 'center'
     },
     {
-      label: '编码',
-      prop: 'code',
-      align: 'center',
-      render: ({ row }) => (
-        <>
-          <span>{row.code}</span>
-          <ElButton
-            class='ml-8'
-            size='small'
-            circle
-            icon='CopyDocument'
-            onClick={() => {
-              copyTextToClipboard(row.code)
-              $EmMsg.success('复制成功')
-            }}
-          ></ElButton>
-        </>
-      )
+      label: '喂养日期',
+      prop: 'type',
+      align: 'center'
     },
     {
       label: '内容',
       prop: 'content',
-      align: 'center',
-      render: (scoped) => (
-        <ElButton type='primary' size='small' plain onClick={() => openDictDialog(scoped.row)}>
-          添加/编辑内容
-        </ElButton>
-      )
+      align: 'center'
     },
     {
       prop: 'remark',
@@ -88,7 +68,7 @@ export const useList = (getSearchList: () => void) => {
     }
   ]
 
-  const tableAction: EmTableType.IAction<Dict> = {
+  const tableAction: EmTableType.IAction<FeedRecord> = {
     width: 210,
     buttons: [
       {
@@ -104,15 +84,15 @@ export const useList = (getSearchList: () => void) => {
     ]
   }
   const { render: renderDialog, openDialog } = useEditDialog(getSearchList)
-  const { render: renderDictTableDialog, open: openDictDialog } = useDictTableDialog(getSearchList)
+
   return () => (
     <>
       <div class='toolbar'>
         <ElButton type='primary' icon='plus' onClick={() => openDialog()}>
-          添加字典
+          添加喂养记录
         </ElButton>
       </div>
-      <EmTable data={state.dictList} cols={cols} action={tableAction}></EmTable>
+      <EmTable data={state.feedRecordList} cols={cols} action={tableAction}></EmTable>
       <div class='footer'>
         <el-pagination
           v-model:currentPage={state.pagination.current}
@@ -124,7 +104,6 @@ export const useList = (getSearchList: () => void) => {
         ></el-pagination>
       </div>
       {renderDialog()}
-      {renderDictTableDialog()}
     </>
   )
 }

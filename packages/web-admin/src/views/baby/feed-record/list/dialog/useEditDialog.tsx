@@ -1,14 +1,14 @@
 import { reactive, ref } from 'vue'
 import { type EmFormType } from '@/components'
-import { addDict, updateDict } from '../../api'
-import type { Dict, OpenDialogFunc } from '../../types'
+import { addFeedRecord, updateFeedRecord } from '../../api'
+import type { FeedRecord, OpenDialogFunc } from '../../types'
 
 interface BState {
-  form: Partial<Dict>
+  form: Partial<FeedRecord>
   isShow: boolean
   isAdd: boolean
 }
-/** 字典编辑新增 */
+/** 喂养记录编辑新增 */
 export const useEditDialog = (getSearchList: () => void) => {
   const formRef = ref<HTMLFormElement>()
   const bState = reactive<BState>({
@@ -20,7 +20,7 @@ export const useEditDialog = (getSearchList: () => void) => {
   const handleSubmit = async () => {
     const res = await formRef.value?.validate().catch(() => false)
     if (!res) return
-    const apiFunc = bState.isAdd ? addDict : updateDict
+    const apiFunc = bState.isAdd ? addFeedRecord : updateFeedRecord
     apiFunc(bState.form).then(() => {
       getSearchList()
       $EmMsg.success('操作成功')
@@ -41,24 +41,22 @@ export const useEditDialog = (getSearchList: () => void) => {
 
   const items: EmFormType.Items = [
     {
-      label: '字典名称',
-      field: 'name',
-      render: () => <el-input v-model={bState.form.name} placeholder='请输入字典名称' />,
-      rules: [{ required: true, message: '请输入字典名称', trigger: 'blur' }]
+      label: '记录类型',
+      field: 'type',
+      render: () => <el-input v-model={bState.form.type} placeholder='请输入喂养记录类型' />,
+      rules: [{ required: true, message: '请输入喂养记录类型', trigger: 'blur' }]
     },
     {
-      label: '字典编码',
-      field: 'code',
-      render: () => (
-        <el-input
-          v-model={bState.form.code}
-          placeholder='请输入字典编码'
-          onInput={(code: string) => {
-            bState.form.code = code.replace(/\W/g, '').toUpperCase()
-          }}
-        />
-      ),
-      rules: [{ required: true, message: '请输入字典编码', trigger: 'blur' }]
+      label: '喂养时间',
+      field: 'feedTime',
+      render: () => <el-input v-model={bState.form.feedTime} placeholder='请输入喂养时间' />,
+      rules: [{ required: true, message: '请输入喂养时间', trigger: 'blur' }]
+    },
+    {
+      label: '喂养内容',
+      field: 'content',
+      render: () => <el-input v-model={bState.form.content} placeholder='请输入喂养喂养内容' />,
+      rules: [{ required: true, message: '请输入喂养内容', trigger: 'blur' }]
     },
     {
       label: '备注',
@@ -80,7 +78,7 @@ export const useEditDialog = (getSearchList: () => void) => {
       <div class='form-dialog'>
         <el-dialog
           v-model={bState.isShow}
-          title={bState.isAdd ? '新增字典' : '修改字典'}
+          title={bState.isAdd ? '新增喂养记录' : '修改喂养记录'}
           width='540px'
           center
           onClose={handleCancel}

@@ -1,17 +1,17 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
 import { defineCtxState } from '@mid-vue/use'
-import { getDictList } from '../api'
+import { getFeedRecordList } from '../api'
 import { useList } from './useList'
 import { useSearchForm } from './useSearchForm'
-import type { DictListState } from '../types'
+import type { FeedRecordListState } from '../types'
 
 export default defineComponent({
-  name: 'DictMg',
+  name: 'FeedRecord',
   setup() {
-    const [state] = defineCtxState<DictListState>({
+    const [state] = defineCtxState<FeedRecordListState>({
       listLoading: false,
-      dictList: [],
+      feedRecordList: [],
       searchForm: {},
       pagination: {
         current: 1,
@@ -24,10 +24,10 @@ export default defineComponent({
     const getSearchList = () => {
       const params = Object.assign({}, state.searchForm, state.pagination)
       state.listLoading = true
-      getDictList(params)
+      getFeedRecordList(params)
         .then((res) => {
           state.listLoading = false
-          state.dictList = res.list || []
+          state.feedRecordList = res.list || []
           state.pagination.total = res.count
         })
         .catch(() => {
@@ -39,7 +39,7 @@ export default defineComponent({
     const renderList = useList(getSearchList)
 
     return () => (
-      <div class='dict-mg'>
+      <div class='feed-record'>
         {renderSearch()}
         {renderList()}
       </div>

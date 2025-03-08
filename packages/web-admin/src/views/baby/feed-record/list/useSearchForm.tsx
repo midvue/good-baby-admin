@@ -1,8 +1,8 @@
 import { useCtxState } from '@mid-vue/use'
-import type { DictListState } from '../types'
+import type { FeedRecordListState } from '../types'
 
 export const useSearchForm = (getSearchList: () => void) => {
-  const [state, setState] = useCtxState<DictListState>()
+  const [state, setState] = useCtxState<FeedRecordListState>()
   const handleSearch = () => {
     getSearchList()
   }
@@ -16,13 +16,13 @@ export const useSearchForm = (getSearchList: () => void) => {
   return () => (
     <div class='search-form'>
       <el-form class='el-form' model={state.searchForm} label-width='100px'>
-        <el-form-item label='字典id'>
+        <el-form-item label='喂养记录id'>
           <el-input v-model={state.searchForm.id} placeholder='请输入用户id' clearable />
         </el-form-item>
-        <el-form-item label='字典名称'>
+        <el-form-item label='喂养记录名称'>
           <el-input v-model={state.searchForm.name} placeholder='请输入用户名称' clearable />
         </el-form-item>
-        <el-form-item label='字典编码'>
+        <el-form-item label='喂养记录编码'>
           <el-input v-model={state.searchForm.code} placeholder='请输入用户名称' clearable />
         </el-form-item>
         <el-form-item>
