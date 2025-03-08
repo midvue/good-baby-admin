@@ -17,8 +17,10 @@ export function parseHeaders(config: HttpRequestConfig) {
   const _headers = {
     ...config.headers,
     method: url,
-    Authorization: token ? 'Bearer ' + token : undefined,
-    sign: _getSign(),
+    sign: _getSign()
+  } as Record<string, any>
+  if (token) {
+    _headers.Authorization = 'Bearer ' + token
   }
   return _headers
 }
@@ -68,6 +70,6 @@ export function parseRequest(config: HttpRequestConfig) {
   return {
     ...config,
     headers,
-    ...body,
+    ...body
   }
 }

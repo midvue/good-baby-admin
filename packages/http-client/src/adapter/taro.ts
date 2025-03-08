@@ -7,7 +7,7 @@ export function createWXAdapter(config: HttpRequestConfig): any {
     // @ts-ignore
     ;(wx as Wx).request({
       method: config.method,
-      url: config.url!,
+      url: config.baseURL + config.url!,
       data: config.data,
       header,
       enableHttp2: true,
