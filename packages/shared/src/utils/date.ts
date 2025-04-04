@@ -1,6 +1,6 @@
-import dayjs, { ManipulateType, OpUnitType, QUnitType } from 'dayjs'
-import duration from 'dayjs/plugin/duration'
+import dayjs, { OpUnitType, QUnitType } from 'dayjs'
 import type { DurationUnitType } from 'dayjs/plugin/duration'
+import duration from 'dayjs/plugin/duration'
 dayjs.extend(duration)
 
 /**
