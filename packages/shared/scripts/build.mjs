@@ -36,7 +36,6 @@ const createPackageJson = () => {
     "name": "${pkgName}",
     "version": "${version}",
     "description": "${description}",
-    "type": "${type}",
     "main": "${pkgUMD}",
     "module":"${pkgESM}",
     "types": "index.d.ts",
@@ -44,12 +43,11 @@ const createPackageJson = () => {
       ".": {
         "import": "${pkgESM}",
         "require": "${pkgUMD}"
-      },
-      "./style.css": "./style.css"
+      }
     },
     "keywords": ["lodash", "dayjs", "big.js","${name || ''}"],
     "license": "MIT",
-    "author": "SPig",
+    "author": "Spig",
     "publishConfig":${JSON.stringify(publishConfig)},
     "dependencies":${JSON.stringify(dependencies)},
     "peerDependencies":  ${peerDependencies ? JSON.stringify(peerDependencies) : '{}'}
@@ -70,12 +68,6 @@ const buildAll = async () => {
         entry: './src/index.ts',
         name: 'shared',
         fileName: (format) => `shared.${format}.js`,
-      },
-      rollupOptions: {
-        external: ['vue'],
-        globals: {
-          vue: 'Vue',
-        },
       },
     },
   })
