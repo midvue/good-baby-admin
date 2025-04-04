@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import dayjs, { ManipulateType, OpUnitType, QUnitType } from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import type { DurationUnitType } from 'dayjs/plugin/duration'
 dayjs.extend(duration)
@@ -90,12 +90,16 @@ export function getCurrDate(i = 0, format = 'YYYY-MM-DD'): string {
  *  dateDiff(1709286300000,1709286400000)
  * ```
  */
-export function dateDiff(date1: dayjs.ConfigType, date2?: dayjs.ConfigType): number {
+export function dateDiff(
+  date1: dayjs.ConfigType,
+  date2?: dayjs.ConfigType,
+  unit?: QUnitType | OpUnitType
+): number {
   if (!date1) return 0
   if (!date2) date2 = undefined
   const _date1 = useDate(date1)
   const _date2 = useDate(date2)
-  return useDate(_date1).diff(_date2)
+  return useDate(_date1).diff(_date2, unit)
 }
 
 type Format = {
@@ -122,6 +126,7 @@ type Format = {
  */
 export function dateFromNow(date: dayjs.ConfigType, _format?: Format): string {
   const format = {
+    zero: '刚刚',
     minuteAgo: '${m}分钟前',
     today: '今天 ${HH:mm}',
     yesterday: '昨天 ${HH:mm}',
@@ -135,6 +140,7 @@ export function dateFromNow(date: dayjs.ConfigType, _format?: Format): string {
   const diffMinutes = now.diff(targetDate, 'minute')
 
   const formatString = (formatStr: string) => {
+    if (formatStr === format.zero) return formatStr
     return formatStr.replace(/\${(.*?)}/g, (_, p1) => targetDate.format(p1))
   }
 
@@ -154,12 +160,48 @@ export function dateFromNow(date: dayjs.ConfigType, _format?: Format): string {
   }
 }
 
+/**
+ * 计算两个日期之间的差值(自然年月日)
+ * @param  startDate - 起始日期，格式为 'YYYY-MM-DD HH:mm:ss'
+ * @param  endDate - 结束日期，格式为 'YYYY-MM-DD HH:mm:ss'
+ * @param format - 输出格式，如 'YY年MM月DD日', 'HH小时mm分钟ss秒' 等 (默认YY年MM个月DD天)
+ * @returns  根据格式包含差值的字符串
+ */
+export function dateDiffFormat(
+  startDate: string | number | Date,
+  endDate?: string | number | Date,
+  format = 'YY年MM个月DD天'
+) {
+  const start = dayjs(startDate)
+  const end = dayjs(endDate)
+  const units = {
+    YY: 'year',
+    MM: 'month',
+    DD: 'day',
+    HH: 'hour',
+    mm: 'minute',
+    ss: 'second',
+  } as Record<string, any>
+
+  let result = format
+  let currentStart = start
+
+  for (const [key, value] of Object.entries(units)) {
+    if (result.includes(key)) {
+      const diff = end.diff(currentStart, value)
+      result = result.replace(key, diff > 0 ? '' + diff : '0')
+      currentStart = currentStart.add(diff, value)
+    }
+  }
+  return result.trim().replace(/\s+/g, ' ') // 去掉多余的空格
+}
+
 export function durationFormat(
   duration: string | number,
   config?: {
     unit?: DurationUnitType
     format?: string
-  },
+  }
 ): string
 
 export function durationFormat(
@@ -167,7 +209,7 @@ export function durationFormat(
   config?: {
     unit?: DurationUnitType
     format: Array<string>
-  },
+  }
 ): Array<string>
 
 /**
@@ -194,7 +236,7 @@ export function durationFormat(
   config?: {
     unit?: DurationUnitType
     format?: Array<string> | string
-  },
+  }
 ): Array<string> | string {
   if (!duration) return ''
   const { format = 'HH小时mm分钟', unit = 'ms' } = config || {}
@@ -231,7 +273,7 @@ export function durationFormatNoZero(
   config?: {
     unit?: DurationUnitType
     format?: string
-  },
+  }
 ): Array<string> | string {
   if (!duration) return ''
   const { format = 'D天H小时m分钟', unit = 'ms' } = config || {}

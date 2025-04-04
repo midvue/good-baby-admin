@@ -3,13 +3,17 @@ import type { FeedRecordListState } from '../types'
 
 export const useSearchForm = (getSearchList: () => void) => {
   const [state, setState] = useCtxState<FeedRecordListState>()
+
   const handleSearch = () => {
     getSearchList()
   }
   handleSearch()
 
   const handleReset = () => {
-    setState((state) => (state.searchForm = {}))
+    setState((state) => {
+      state.feedRecordList = []
+    })
+
     getSearchList()
   }
 

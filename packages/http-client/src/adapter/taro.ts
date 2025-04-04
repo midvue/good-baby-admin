@@ -19,7 +19,7 @@ export function createWXAdapter(config: HttpRequestConfig): any {
           statusText: 'OK',
           headers: header,
           config: config,
-          request: config,
+          request: config
         }
         resolve(response)
       },
@@ -29,7 +29,7 @@ export function createWXAdapter(config: HttpRequestConfig): any {
         error._config = config
 
         reject(error)
-      },
+      }
     })
   })
 }

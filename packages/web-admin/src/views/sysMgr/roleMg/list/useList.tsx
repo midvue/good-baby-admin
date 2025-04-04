@@ -1,6 +1,7 @@
-import type { OpenDialogFunc, Role, RoleListState, OpenPerrDialogFunc } from "../types";
-import { deleteRole, updateRoleStatus } from "../api";
-import { ref } from "vue";
+import type { OpenDialogFunc, Role, RoleListState, OpenPerrDialogFunc } from '../types'
+import { deleteRole, updateRoleStatus } from '../api'
+import { ref } from 'vue'
+import { EmTableType } from '@/components/EmTable'
 
 export const useList = (
   state: RoleListState,
@@ -9,143 +10,143 @@ export const useList = (
   getSearchList: () => void
 ) => {
   const handleAdd = () => {
-    openDialog(true);
-  };
+    openDialog(true)
+  }
 
   const handleEdit = (row: Role) => {
-    openDialog(false, row);
-  };
+    openDialog(false, row)
+  }
 
   const handleDelete = (id: number) => {
-    $EmMsgBox.warning("确定永久删除当前角色吗,请谨慎操作!", {}).then(async () => {
+    $EmMsgBox.warning('确定永久删除当前角色吗,请谨慎操作!', {}).then(async () => {
       deleteRole({ id }).then(() => {
-        getSearchList!();
-        $EmMsg.success("删除成功");
-      });
-    });
-  };
+        getSearchList!()
+        $EmMsg.success('删除成功')
+      })
+    })
+  }
 
   const handleSizeChange = (size: number) => {
-    state.pagination.size = size;
-    getSearchList();
-  };
+    state.pagination.size = size
+    getSearchList()
+  }
   const handleCurrentChange = (current: number) => {
-    state.pagination.current = current;
-    getSearchList();
-  };
+    state.pagination.current = current
+    getSearchList()
+  }
 
   const handlechangeStatus = ({ id, status }: Role) => {
     updateRoleStatus({ id, status })
-      .then(() => $EmMsg.success(`${status === 0 ? "已禁用" : "已启用"}`))
-      .catch(() => getSearchList());
-  };
+      .then(() => $EmMsg.success(`${status === 0 ? '已禁用' : '已启用'}`))
+      .catch(() => getSearchList())
+  }
 
   const handlePermission = (row: Role) => {
-    openPerrDialog(row);
-  };
+    openPerrDialog(row)
+  }
 
   const cols = ref([
     {
-      prop: "id",
-      label: "角色id",
+      prop: 'id',
+      label: '角色id',
       width: 80,
-      align: "center",
+      align: 'center'
     },
     {
-      prop: "name",
-      label: "角色名称",
+      prop: 'name',
+      label: '角色名称',
       width: 150,
-      align: "center",
+      align: 'center'
     },
     {
-      prop: "code",
-      label: "角色编码",
+      prop: 'code',
+      label: '角色编码',
       width: 150,
-      align: "center",
+      align: 'center'
     },
     {
-      prop: "order",
-      label: "排序",
+      prop: 'order',
+      label: '排序',
       width: 80,
-      align: "center",
+      align: 'center'
     },
     {
-      prop: "status",
-      label: "状态",
+      prop: 'status',
+      label: '状态',
       width: 130,
-      align: "center",
-      render: ({ row }: RowScoped<Role>) => (
+      align: 'center',
+      render: ({ row }: EmTableType.IAction<Role>) => (
         <el-switch
           v-model={row.status}
           inline-prompt
-          active-text="已启用"
-          inactive-text="已禁用"
-          size="large"
-          width="72px"
+          active-text='已启用'
+          inactive-text='已禁用'
+          size='large'
+          width='72px'
           active-value={1}
           inactive-value={0}
           onChange={() => handlechangeStatus(row)}
         />
-      ),
+      )
     },
     {
-      prop: "pid",
-      label: "创建者",
+      prop: 'pid',
+      label: '创建者',
       width: 150,
-      align: "center",
+      align: 'center'
     },
     {
-      prop: "remark",
-      label: "备注",
-      align: "center",
+      prop: 'remark',
+      label: '备注',
+      align: 'center'
     },
     {
-      prop: "createTime",
-      label: "创建时间",
+      prop: 'createTime',
+      label: '创建时间',
       width: 150,
-      align: "center",
+      align: 'center'
     },
     {
-      prop: "updateTime",
-      label: "更新时间",
+      prop: 'updateTime',
+      label: '更新时间',
       width: 150,
-      align: "center",
-    },
-  ]);
+      align: 'center'
+    }
+  ])
 
   const tableAction = {
     width: 250,
     buttons: [
       {
-        title: "分配权限",
-        type: "primary",
-        click: ({ row }: RowScoped<Role>) => handlePermission(row),
-        permission: "Sign",
+        title: '分配权限',
+        type: 'primary',
+        click: ({ row }: EmTableType.IAction<Role>) => handlePermission(row),
+        permission: 'Sign'
       },
       {
-        title: "编辑",
-        type: "primary",
-        click: ({ row }: RowScoped<Role>) => handleEdit(row),
-        permission: "Edit",
+        title: '编辑',
+        type: 'primary',
+        click: ({ row }: EmTableType.IAction<Role>) => handleEdit(row),
+        permission: 'Edit'
       },
       {
-        title: "删除",
-        type: "danger",
-        click: ({ row }: RowScoped<Role>) => handleDelete(row.id),
-        permission: "Del",
-      },
-    ],
-  };
+        title: '删除',
+        type: 'danger',
+        click: ({ row }: EmTableType.IAction<Role>) => handleDelete(row.id),
+        permission: 'Del'
+      }
+    ]
+  }
 
   return () => (
     <>
-      <div class="toolbar">
-        <el-button type="primary" icon="plus" onClick={() => handleAdd()} v-permission="Add">
+      <div class='toolbar'>
+        <el-button type='primary' icon='plus' onClick={() => handleAdd()} v-permission='Add'>
           添加角色
         </el-button>
       </div>
       <em-table data={state.roleList} cols={cols.value} action={tableAction}></em-table>
-      <div class="footer">
+      <div class='footer'>
         <el-pagination
           v-model:currentPage={state.pagination.current}
           v-model:page-size={state.pagination.size}
@@ -156,5 +157,5 @@ export const useList = (
         ></el-pagination>
       </div>
     </>
-  );
-};
+  )
+}

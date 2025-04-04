@@ -6,7 +6,7 @@
     "dev:docs": "pnpm -C docs dev",
     "dev:admin": "pnpm -C packages/web-admin dev",
     "dev": "run-s  build:vite-config dev:admin ",
-    "build:admin": "pnpm -C packages/web-demo build",
+    "build:admin": "pnpm -C packages/web-admin build",
     "build:shared": "pnpm -C packages/shared build",
     "build:vite-config": "pnpm -C packages/vite-config build",
     "build": "run-p  build:vite-config  build:shared",

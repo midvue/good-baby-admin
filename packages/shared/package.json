@@ -1,6 +1,6 @@
 {
   "name": "@mid-vue/shared",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "this is a shared package",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
@@ -14,14 +14,13 @@
     "build": "node ./scripts/build.mjs"
   },
   "dependencies": {
-    "@types/js-cookie": "^3.0.3",
     "@types/big.js": "^6.1.6",
+    "@types/js-cookie": "^3.0.3",
     "big.js": "^6.2.1",
     "dayjs": "^1.11.10",
     "js-cookie": "^3.0.5"
   },
   "devDependencies": {
-    "typedoc": "^0.25.2",
-    "typedoc-plugin-markdown": "^3.16.0"
+    "jsdom": "^26.0.0"
   }
 }

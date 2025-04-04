@@ -17,16 +17,13 @@ export const defaultInterceptors = () => {
             (Array.isArray(ignoreToast) && !ignoreToast.includes(res.data.code)) ||
             !ignoreToast
           ) {
-            const msg = res.data.msg || res.message || '接口错误'
-            showErrorMsg?.(msg)
+            showErrorMsg?.(res.data.msg || res.message || '接口错误')
           }
           return reject(res)
         }
-
         const errorTips = commonResponseErrorMsg(res)
-
         showErrorMsg?.(errorTips)
-        return Promise.reject(res)
+        return reject(res)
       })
     },
     rejectResponse: (res: any) => {

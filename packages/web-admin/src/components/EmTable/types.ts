@@ -21,8 +21,8 @@ export interface ICol<T = any> {
   headerAlign?: string
   showTooltipWhenOverflow?: boolean
   showOverflowTooltip?: boolean
-  render?: (scoped: RowScoped<T>) => JSX.Element | string | null | VNode
-  renderHeader?: (scoped: RowScoped<T>) => JSX.Element | string | null | VNode
+  render?: (scoped: EmTableType.IAction<T>) => JSX.Element | string | null | VNode
+  renderHeader?: (scoped: EmTableType.IAction<T>) => JSX.Element | string | null | VNode
 }
 
 export type Cols<T = any> = Array<ICol<T>>
@@ -33,7 +33,7 @@ interface Btn<T> {
   size?: 'small' | 'default' | 'large'
   icon?: string
   circle?: boolean
-  click?: (scoped: RowScoped<T>) => void
+  click?: (scoped: EmTableType.IAction<T>) => void
   permission?: string
   attr?: Record<string, any>
 }

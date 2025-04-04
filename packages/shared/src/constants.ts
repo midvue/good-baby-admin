@@ -11,3 +11,17 @@ export enum EnumYesNo {
    */
   NO = 0,
 }
+
+/**
+ * 普通是与否枚举(10,20)
+ */
+export enum EnumYesNoPlus {
+  /**
+   * 是('10')
+   */
+  YES = '10',
+  /**
+   * 否('20')
+   */
+  NO = '20',
+}

@@ -9,6 +9,7 @@ import type { FeedRecordListState } from '../types'
 export default defineComponent({
   name: 'FeedRecord',
   setup() {
+    //前端页面的共享的state
     const [state] = defineCtxState<FeedRecordListState>({
       listLoading: false,
       feedRecordList: [],

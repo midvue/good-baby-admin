@@ -1,13 +1,13 @@
 import { isEmptyObject } from '../utils'
 import type { AxiosInstance } from 'axios'
-import type { HttpInterceptor, HttpRequestConfig, MultiInterceptor } from '../types'
+import type { HttpInterceptor, HttpRequestConfig, HttpResponse, MultiInterceptor } from '../types'
 
 export function mergeInterceptor(httpInterceptor?: Partial<HttpInterceptor>) {
   const opt: MultiInterceptor = {
     request: [],
     response: [],
     rejectRequest: [],
-    rejectResponse: [],
+    rejectResponse: []
   }
 
   // 重试
@@ -24,27 +24,27 @@ export function mergeInterceptor(httpInterceptor?: Partial<HttpInterceptor>) {
     ...opt.request.map((i) => {
       return {
         callback: i,
-        type: 'request',
+        type: 'request'
       }
     }),
     ...opt.response.map((i) => {
       return {
         callback: i,
-        type: 'response',
+        type: 'response'
       }
     }),
     ...opt.rejectRequest.map((i) => {
       return {
         callback: i,
-        type: 'rejectRequest',
+        type: 'rejectRequest'
       }
     }),
     ...opt.rejectResponse.map((i) => {
       return {
         callback: i,
-        type: 'rejectResponse',
+        type: 'rejectResponse'
       }
-    }),
+    })
   ].filter(Boolean)
   return interceptorList
 }
@@ -64,16 +64,35 @@ export function handleInterceptor(request: AxiosInstance, reqConfig: HttpRequest
   })
 }
 
-const getErrorsTips = {
-  'Network Error': '网络错误，请检查网络',
-  'timeout of 20000ms exceeded': '请求超时，服务器未响应',
-  'Request failed with status code 500': '请求服务器错误',
-  'Internal Server Error': '请求服务器错误',
-  'Request failed with status code 502': '请求服务器错误',
-  api: '接口错误',
-} as Record<string, string>
-
-export function commonResponseErrorMsg(res: { message?: string; msg?: string; errMsg?: string }) {
-  const msg = res.message || res.msg || res.errMsg || ''
-  return getErrorsTips[msg] || msg || getErrorsTips.api
+export function commonResponseErrorMsg(res: HttpResponse) {
+  const msg = res.data?.message || res.msg
+  let errorMsg = ''
+  switch (res.status) {
+    case 401:
+      errorMsg = '401:' + msg
+      break
+    case 403:
+      errorMsg = msg
+      break
+    case 404:
+      errorMsg = '404: ' + msg
+      break
+    case 422:
+      errorMsg = '请求参数错误' + msg
+      break
+    case 426:
+      errorMsg = '426: ' + msg
+      break
+    case 428:
+      errorMsg = '428: ' + msg
+      break
+    case 500: {
+      errorMsg = '服务器错误: ' + msg
+      break
+    }
+    default:
+      errorMsg = '未知的情况'
+      break
+  }
+  return errorMsg
 }
